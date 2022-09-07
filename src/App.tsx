@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Checkout from "./components/Checkout";
 import Header from "./components/Header";
