@@ -8,6 +8,9 @@ const Order = require("./models/orderModel");
 const cors = require("cors");
 const asyncHandler = require("express-async-handler");
 const bodyParser = require("body-parser");
+const menuItems = require("./assets/menu");
+
+const sendTextMessage = require("./communication/textMessage");
 
 const jsonParser = bodyParser.json();
 
@@ -32,13 +35,30 @@ app.post("/order", jsonParser, async (req, res) => {
   });
   try {
     const newOrder = await order.save();
+
+    console.log(newOrder);
+
+    // send text message with menu items and total
+    let message = "Thank you for your order! Your order is: ";
+    console.log(req.body.orderItems, message);
+    let total = 0;
+    const orderItem = JSON.parse(newOrder.orderItems);
+    console.log(orderItem);
+    Object.keys(orderItem).forEach((key) => {
+      const menuItem = menuItems[key - 1];
+      console.log(menuItem);
+      message += `${menuItem.name} x ${orderItem[key]} `;
+      total += menuItem.price * orderItem[key];
+    });
+    message += `Total:$${total + 0.1025 * total}`;
+    console.log(message);
+    sendTextMessage(newOrder.phoneNumber, message);
     res.status(201).json(newOrder);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 
-    // res.status(201).json({ message: "Order created" });
-
+  // res.status(201).json({ message: "Order created" });
 });
 
 app.listen(port, () => {
