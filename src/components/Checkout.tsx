@@ -6,7 +6,7 @@ import axios from "axios";
 const Checkout = () => {
   const initialCart = localStorage.getItem("cart1");
   const [Cart, setCart] = useState(initialCart ? JSON.parse(initialCart) : {});
-  const [OrderItems, setOrderItems] = useState<any>([]);
+
   const [FormData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -23,16 +23,7 @@ const Checkout = () => {
   const onSubmitOrder = async (e: SyntheticEvent) => {
     // send post request to localhost:4000/order
     e.preventDefault();
-    console.log(Object.keys(Cart));
-    Object.keys(Cart).forEach((item: any) => {
-      setOrderItems((prev: any) => [
-        ...prev,
-        {
-          item: menuItems[parseInt(item) - 1].name,
-          qty: Cart[item],
-        },
-      ]);
-    });
+    
 
     const body = {
       fullName: FormData.fullName,
@@ -40,12 +31,12 @@ const Checkout = () => {
       address: FormData.address,
       city: FormData.city,
       phoneNumber: FormData.phoneNumber,
-      orderItems: OrderItems,
+      orderItems: JSON.stringify(Cart),
     };
     const data = await axios.post("http://localhost:4000/order", body);
 
-    console.log(data);
-    setOrderItems([]);
+    console.log(data.data);
+
     // localStorage.removeItem("cart1");
     // setCart({});
   };

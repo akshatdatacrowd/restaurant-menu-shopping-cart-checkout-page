@@ -22,12 +22,10 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    orderItems: [
-      {
-        item: { type: Number, required: true },
-        qty: { type: Number, required: true },
-      },
-    ],
+    orderItems: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
