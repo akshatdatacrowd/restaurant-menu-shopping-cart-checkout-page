@@ -4,6 +4,7 @@ import Checkout from "./components/Checkout";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Order from "./components/Order";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -12,10 +13,11 @@ function App() {
       <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/about" element={<Home />} />
+        <Route path="/" element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>  
+      <Footer />
       </Router>
       
     </>

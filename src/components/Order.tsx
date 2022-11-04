@@ -38,7 +38,7 @@ const Order = () => {
   return (
     <>
       <div className="d-flex">
-        <h1 className="text-primary end-0 start-0 text-center position-absolute">
+        <h1 className="text-success end-0 start-0 text-center position-absolute my-3 fw-bold">
           Order Here{" "}
         </h1>
         <span

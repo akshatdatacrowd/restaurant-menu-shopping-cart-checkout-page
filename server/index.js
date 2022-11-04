@@ -52,6 +52,7 @@ app.post("/order", jsonParser, async (req, res) => {
     });
     message += `Total:$${total + 0.1025 * total}`;
     console.log(message);
+    res.status(201).json(newOrder);
     sendTextMessage(newOrder.phoneNumber, message);
     res.status(201).json(newOrder);
   } catch (err) {

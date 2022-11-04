@@ -61,3 +61,25 @@ code {
 .text-pink {  
   color: #df3ca6;
 }
+
+.about-heading {
+  font-size: 100px;
+  font-family :'Times New Roman', Times, serif;
+
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.font-times {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+Link {
+  /* no underline */
+  text-decoration: none;
+  
+}
+
+.bg-ranaheader {
+  background-color: antiquewhite;
+}

@@ -2,10 +2,12 @@ import { SyntheticEvent, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import menuItems from "./assets/menu";
 import axios from "axios";
+import ThankYou from "./ThankYou";
 
 const Checkout = () => {
   const initialCart = localStorage.getItem("cart1");
   const [Cart, setCart] = useState(initialCart ? JSON.parse(initialCart) : {});
+  const [ShowThankYou, setShowThankYou] = useState(false);
 
   const [FormData, setFormData] = useState({
     fullName: "",
@@ -35,7 +37,10 @@ const Checkout = () => {
     };
     const data = await axios.post("http://localhost:4000/order", body);
 
-    console.log(data.data);
+    if (data.status === 201) {
+      setShowThankYou(true);
+      localStorage.removeItem("cart1");
+    }
 
     // localStorage.removeItem("cart1");
     // setCart({});
@@ -185,6 +190,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      {ShowThankYou && (<ThankYou fullName={FormData.fullName} />)}
     </>
   );
 };
